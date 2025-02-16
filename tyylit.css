@@ -1,0 +1,17 @@
+  body {
+    background-color: rgb(204, 221, 227);
+  }
+  
+  p {
+    font-family: verdana;
+    font-size: 16px;
+  }
+
+  label, em {
+    font-family: verdana;
+    font-size: 16px;
+  }
+
+  em {
+    color: red;
+  }
