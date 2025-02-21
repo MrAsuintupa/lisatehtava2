@@ -1,0 +1,67 @@
+<!-- 
+	JavaScriptiä, HTML:ää ja CSS:ää käyttävä kertolaskupeli, jolla
+	voi harjoitella kertotauluja (kertolaskuja) drilli- eli toisto-
+	opetusmenetelmää käyttäen.
+
+	Copyright 2022 Raine Kauppinen
+	
+	Lisenssi:
+	Creative Commons Nimeä-EiKaupallinen 4.0 Kansainvälinen,
+	ks. http://creativecommons.org/licenses/by-nc/4.0/
+-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Kertolaskupeli</title>
+		<link rel="stylesheet" href="tyylit.css">
+	</head>
+
+	<body onload="pelaa(0);">
+		<form>
+			<p id="lasku">
+				JavaScript ei ole päällä tai jotain muuta meni pieleen.</p>
+			<label for="vastaus">Vastauksesi (1-100):</label>
+			<input type="number" id="vastaus" name="vastaus"
+				min="1" max="100" value="0">
+			<input
+				onclick="pelaa(document.getElementById('vastaus').value);"
+				type="button" id="nappi" name="nappi" value="Tarkista">
+		</form>
+		<div id="tarkistus"></div>
+		
+		<script>
+			"use strict";
+			// globaali muuttuja kertolaskun tuloksen säilyttämiseen
+			let tulos = 0;
+
+			/**
+			 * Funktio pelaa joka arpoo seuraavan laskutehtävän ja
+			 * tarkistaa ja kertoo edellisen tehtävän tuloksen
+			 * parametrin vastaus perusteella.
+			 */
+			function pelaa(vastaus) {
+				let kertoja  = Math.floor(Math.random() * 10) + 1;
+				let kerrottava = Math.floor(Math.random() * 10) + 1;
+
+				document.getElementById('lasku').innerHTML = "Paljonko on " + 
+					kertoja + " * " + kerrottava + "?";
+
+				if (vastaus >= 1 && vastaus <= 100) {
+					if (vastaus == tulos) {
+						document.getElementById('tarkistus').innerHTML =
+							"<p>Oikein! Uusi laskutehtävä on yllä.</p>";
+					} else {
+						document.getElementById('tarkistus').innerHTML =
+							"<p>Väärin. Uusi laskutehtävä on yllä.</p>";
+					}
+
+				} else {
+					document.getElementById('tarkistus').innerHTML =
+						"<p><em>Anna vastaus lukuna väliltä 1-100.</em></p>";
+				}
+				
+				tulos = kertoja * kerrottava;
+			}
+		</script>
+	</body>
+</html>
